@@ -3,7 +3,9 @@ package com.tcc.project_service.controllers;
 
 import com.tcc.project_service.dto.TaskDTO;
 import com.tcc.project_service.services.TaskService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,7 +27,10 @@ public class TaskController {
     @GetMapping("/{id}")
     public TaskDTO getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id)
-                .orElseThrow(() -> new RuntimeException("Tarea no encontrada con id " + id));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Tarea no encontrada con id " + id
+                ));
     }
 
     @GetMapping("/project/{projectId}")

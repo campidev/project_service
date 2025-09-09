@@ -2,7 +2,9 @@ package com.tcc.project_service.controllers;
 
 import com.tcc.project_service.dto.CommentDTO;
 import com.tcc.project_service.services.CommentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,7 +26,10 @@ public class CommentController {
     @GetMapping("/{id}")
     public CommentDTO getCommentById(@PathVariable Long id) {
         return commentService.getCommentById(id)
-                .orElseThrow(() -> new RuntimeException("Comentario no encontrado con id " + id));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Comentario no encontrado con id " + id
+                ));
     }
 
     @GetMapping("/task/{taskId}")

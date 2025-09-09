@@ -3,7 +3,9 @@ package com.tcc.project_service.controllers;
 
 import com.tcc.project_service.dto.ProjectDTO;
 import com.tcc.project_service.services.ProjectService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -26,7 +28,10 @@ public class ProjectController {
     @GetMapping("/{id}")
     public ProjectDTO getProjectById(@PathVariable Long id) {
         return projectService.getProjectById(id)
-                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado con id " + id));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Proyecto no encontrado con id " + id
+                ));
     }
 
     @PostMapping

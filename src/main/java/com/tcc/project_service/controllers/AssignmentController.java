@@ -2,7 +2,9 @@ package com.tcc.project_service.controllers;
 
 import com.tcc.project_service.dto.AssignmentDTO;
 import com.tcc.project_service.services.AssignmentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,7 +27,10 @@ public class AssignmentController {
     @GetMapping("/{id}")
     public AssignmentDTO getAssignmentById(@PathVariable Long id) {
         return assignmentService.getAssignmentById(id)
-                .orElseThrow(() -> new RuntimeException("Asignación no encontrada con id " + id));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Asignación no encontrada con id " + id
+                ));
     }
 
     @GetMapping("/task/{taskId}")

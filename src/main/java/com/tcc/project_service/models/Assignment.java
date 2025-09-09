@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "ASSIGNMENTS", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"taskId", "userId"})
-})
+},schema = "SYS")
 public class Assignment {
 
     @Id

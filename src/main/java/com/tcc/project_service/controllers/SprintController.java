@@ -2,7 +2,9 @@ package com.tcc.project_service.controllers;
 
 import com.tcc.project_service.dto.SprintDTO;
 import com.tcc.project_service.services.SprintService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,7 +27,10 @@ public class SprintController {
     @GetMapping("/{id}")
     public SprintDTO getSprintById(@PathVariable Long id) {
         return sprintService.getSprintById(id)
-                .orElseThrow(() -> new RuntimeException("Sprint no encontrado con id " + id));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Sprint no encontrado con id " + id
+                ));
     }
 
     @GetMapping("/project/{projectId}")
