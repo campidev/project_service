@@ -1,0 +1,30 @@
+### Maven ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+### Gradle ###
+build/
+.gradle/
+
+### IDEs ###
+*.iml
+.idea/
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+out/
+
+### Logs ###
+*.log
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Seguridad ###
+# Evita exponer contraseñas reales
+application-*.yml
+application-*.properties
